@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso de Gestión de TI | Academia Tech</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            line-height: 1.6;
+        }
+
+        /* ===== HEADER & NAV ===== */
+        header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-bottom: 1px solid #334155;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #38bdf8;
+            text-decoration: none;
+        }
+
+        .logo span {
+            background: linear-gradient(90deg, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 0.5rem;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            padding: 0.6rem 1.1rem;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.25s ease;
+        }
+
+        nav a:hover,
+        nav a.active {
+            background: #1e40af;
+            color: #fff;
+        }
+
+        /* Mobile menu button */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #38bdf8;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(rgba(15,23,42,0.75), rgba(15,23,42,0.9)),
+                        url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+            min-height: 480px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.2rem, 5vw, 3.4rem);
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #38bdf8, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            max-width: 650px;
+            margin: 0 auto 2rem;
+            color: #94a3b8;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            padding: 0.9rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(59,130,246,0.4);
+        }
+
+        /* ===== SECTIONS ===== */
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 1.5rem;
+        }
+
+        section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            color: #38bdf8;
+        }
+
+        .section-subtitle {
+            color: #94a3b8;
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* Cards grid */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .card {
+            background: #1e293b;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #334155;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+        }
+
+        .card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .card h3 {
+            margin-bottom: 0.6rem;
+            color: #f1f5f9;
+        }
+
+        .card p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+
+        /* Grades table */
+        .grades-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #1e293b;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .grades-table th,
+        .grades-table td {
+            padding: 1rem 1.2rem;
+            text-align: left;
+        }
+
+        .grades-table th {
+            background: #1e40af;
+            color: white;
+            font-weight: 600;
+        }
+
+        .grades-table tr:nth-child(even) {
+            background: #0f172a;
+        }
+
+        .grades-table tr:hover {
+            background: #334155;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.7rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .badge.aprobado { background: #065f46; color: #6ee7b7; }
+        .badge.pendiente { background: #92400e; color: #fcd34d; }
+
+        /* Notes */
+        .notes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .note {
+            background: #1e293b;
+            border-left: 4px solid #38bdf8;
+            padding: 1.4rem;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .note h4 {
+            color: #38bdf8;
+            margin-bottom: 0.5rem;
+        }
+
+        .note time {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        /* Contact form */
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .contact-info img {
+            width: 100%;
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.3rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.4rem;
+            color: #94a3b8;
+            font-weight: 500;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 10px;
+            color: #e2e8f0;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #38bdf8;
+        }
+
+        textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background: #020617;
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            border-top: 1px solid #1e293b;
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: #1e293b;
+                flex-direction: column;
+                padding: 1rem;
+                gap: 0.3rem;
+            }
+
+            nav ul.show {
+                display: flex;
+            }
+
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== HEADER ========== -->
+    <header>
+        <div class="nav-container">
+            <a href="#inicio" class="logo">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2">
+                    <rect x="2" y="3" width="20" height="14" rx="2"/>
+                    <path d="M8 21h8M12 17v4"/>
+                </svg>
+                <span>Gestión de TI</span>
+            </a>
+
+            <button class="menu-toggle" onclick="document.querySelector('nav ul').classList.toggle('show')">☰</button>
+
+            <nav>
+                <ul>
+                    <li><a href="#inicio" class="active">Inicio</a></li>
+                    <li><a href="#modulos">Módulos</a></li>
+                    <li><a href="#calificaciones">Calificaciones</a></li>
+                    <li><a href="#anotaciones">Anotaciones</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ========== INICIO ========== -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h1>Curso de Gestión de Tecnologías de la Información</h1>
+            <p>Domina la planificación, implementación y gobierno de sistemas TI. Aprende ITIL, gestión de proyectos, seguridad y liderazgo tecnológico.</p>
+            <a href="#modulos" class="btn">Comenzar ahora →</a>
+        </div>
+    </section>
+
+    <!-- ========== MÓDULOS ========== -->
+    <section id="modulos">
+        <h2>Módulos del Curso</h2>
+        <p class="section-subtitle">Contenido estructurado para convertirte en un gestor de TI efectivo</p>
+
+        <div class="cards">
+            <article class="card">
+                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80" alt="Servidores y data center">
+                <div class="card-body">
+                    <h3>1. Fundamentos de Gestión de TI</h3>
+                    <p>Introducción a la gobernanza TI, alineación estratégica con el negocio y frameworks como COBIT e ITIL.</p>
+                </div>
+            </article>
+
+            <article class="card">
+                <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80" alt="Redes y conectividad global">
+                <div class="card-body">
+                    <h3>2. Infraestructura y Operaciones</h3>
+                    <p>Gestión de data centers, cloud computing, redes, virtualización y monitoreo de servicios.</p>
+                </div>
+            </article>
+
+            <article class="card">
+                <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=600&q=80" alt="Seguridad informática">
+                <div class="card-body">
+                    <h3>3. Seguridad de la Información</h3>
+                    <p>Gestión de riesgos, ciberseguridad, compliance y planes de continuidad del negocio.</p>
+                </div>
+            </article>
+
+            <article class="card">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80" alt="Análisis de datos y dashboards">
+                <div class="card-body">
+                    <h3>4. Gestión de Proyectos TI</h3>
+                    <p>Metodologías ágiles, PMBOK, control de presupuesto, stakeholders y entrega de valor.</p>
+                </div>
+            </article>
+
+            <article class="card">
+                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80" alt="Equipo de trabajo colaborando">
+                <div class="card-body">
+                    <h3>5. Liderazgo y Gestión de Equipos</h3>
+                    <p>Soft skills, gestión del cambio, comunicación y desarrollo de talento tecnológico.</p>
+                </div>
+            </article>
+
+            <article class="card">
+                <img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?auto=format&fit=crop&w=600&q=80" alt="Código y programación">
+                <div class="card-body">
+                    <h3>6. Transformación Digital</h3>
+                    <p>Innovación, adopción de tecnologías emergentes, DevOps y cultura digital.</p>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- ========== CALIFICACIONES ========== -->
+    <section id="calificaciones">
+        <h2>Calificaciones</h2>
+        <p class="section-subtitle">Seguimiento de tu progreso académico</p>
+
+        <table class="grades-table">
+            <thead>
+                <tr>
+                    <th>Módulo</th>
+                    <th>Actividad</th>
+                    <th>Calificación</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Fundamentos de Gestión de TI</td>
+                    <td>Examen parcial</td>
+                    <td>92 / 100</td>
+                    <td><span class="badge aprobado">Aprobado</span></td>
+                </tr>
+                <tr>
+                    <td>Infraestructura y Operaciones</td>
+                    <td>Proyecto práctico</td>
+                    <td>88 / 100</td>
+                    <td><span class="badge aprobado">Aprobado</span></td>
+                </tr>
+                <tr>
+                    <td>Seguridad de la Información</td>
+                    <td>Caso de estudio</td>
+                    <td>95 / 100</td>
+                    <td><span class="badge aprobado">Aprobado</span></td>
+                </tr>
+                <tr>
+                    <td>Gestión de Proyectos TI</td>
+                    <td>Presentación final</td>
+                    <td>—</td>
+                    <td><span class="badge pendiente">Pendiente</span></td>
+                </tr>
+                <tr>
+                    <td>Liderazgo y Gestión de Equipos</td>
+                    <td>Trabajo grupal</td>
+                    <td>—</td>
+                    <td><span class="badge pendiente">Pendiente</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- ========== ANOTACIONES ========== -->
+    <section id="anotaciones">
+        <h2>Anotaciones</h2>
+        <p class="section-subtitle">Notas y recordatorios importantes del curso</p>
+
+        <div class="notes-grid">
+            <div class="note">
+                <h4>ITIL 4 – Conceptos clave</h4>
+                <p>Valor, resultados, costos y riesgos. La cadena de valor del servicio es fundamental.</p>
+                <time>15 Ago 2026</time>
+            </div>
+            <div class="note">
+                <h4>Cloud vs On-Premise</h4>
+                <p>Evaluar TCO, escalabilidad y requisitos de compliance antes de decidir la arquitectura.</p>
+                <time>12 Ago 2026</time>
+            </div>
+            <div class="note">
+                <h4>Gestión de Riesgos</h4>
+                <p>Identificar → Analizar → Evaluar → Tratar → Monitorear. Usar matriz de probabilidad e impacto.</p>
+                <time>10 Ago 2026</time>
+            </div>
+            <div class="note">
+                <h4>Reunión de seguimiento</h4>
+                <p>Próxima sesión de dudas: viernes 22 de agosto a las 18:00 (hora local).</p>
+                <time>08 Ago 2026</time>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CONTACTO ========== -->
+    <section id="contacto">
+        <h2>Contacto</h2>
+        <p class="section-subtitle">¿Tienes dudas? Escríbenos y te responderemos lo antes posible</p>
+
+        <div class="contact-wrapper">
+            <div class="contact-info">
+                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=700&q=80" alt="Espacio de trabajo tecnológico">
+                <p><strong>Email:</strong> soporte@gestionti.edu</p>
+                <p><strong>Teléfono:</strong> +34 900 123 456</p>
+                <p><strong>Horario de atención:</strong> Lun – Vie, 9:00 – 18:00</p>
+            </div>
+
+            <form onsubmit="event.preventDefault(); alert('¡Mensaje enviado! Te contactaremos pronto.');">
+                <div class="form-group">
+                    <label for="nombre">Nombre completo</label>
+                    <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre">
+                </div>
+                <div class="form-group">
+                    <label for="email">Correo electrónico</label>
+                    <input type="email" id="email" name="email" required placeholder="tu@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="asunto">Asunto</label>
+                    <select id="asunto" name="asunto">
+                        <option value="consulta">Consulta general</option>
+                        <option value="modulo">Duda sobre un módulo</option>
+                        <option value="calificacion">Consulta de calificación</option>
+                        <option value="tecnico">Problema técnico</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="mensaje">Mensaje</label>
+                    <textarea id="mensaje" name="mensaje" required placeholder="Escribe tu mensaje aquí..."></textarea>
+                </div>
+                <button type="submit" class="btn">Enviar mensaje</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer>
+        <p>© 2026 Academia Gestión de TI · Todos los derechos reservados</p>
+        <p style="margin-top: 0.5rem;">Curso diseñado para profesionales de la tecnología</p>
+    </footer>
+
+    <script>
+        // Resaltar menú activo al hacer scroll
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('nav a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Cerrar menú móvil al hacer clic
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('nav ul').classList.remove('show');
+            });
+        });
+    </script>
+</body>
+</html>
